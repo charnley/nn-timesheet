@@ -6,6 +6,7 @@
 
 """
 
+import matplotlib.pyplot as plt
 import pandas as pd
 import pickle
 
@@ -36,7 +37,18 @@ def main():
     # save_obj("subset", xsl)
 
     xsl = load_obj("subset")
-    print(xsl)
+
+    xsl = xsl.dropna()
+
+    dates_deadline = xsl["deadline_date"] - xsl['sample_recievedate']
+    dates_actual = xsl["sample_reviewdate"] - xsl['sample_recievedate']
+
+    days_deadline = dates_actual.dt.days.values
+    days_actual = dates_deadline.dt.days.values
+
+
+    # bin it
+
 
 
     return
